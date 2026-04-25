@@ -141,19 +141,21 @@ function flipCard() {
   if (now - lastTap < 360) return;
   lastTap = now;
   flipped = !flipped;
-  targetFlip = flipped ? Math.PI : 0;
-  flipButton.textContent = flipped ? 'FLIP TO FRONT' : 'TAP CARD TO FLIP';
+  targetFlip += Math.PI;
+  if (flipButton) {
+    flipButton.textContent = flipped ? 'FLIP TO FRONT' : 'TAP CARD TO FLIP';
+  }
 }
 
 canvas.addEventListener('pointerdown', flipCard);
-flipButton.addEventListener('click', flipCard);
+flipButton?.addEventListener('click', flipCard);
 
 window.addEventListener('pointermove', (event) => {
   targetPointerX = (event.clientX / window.innerWidth - 0.5) * 2;
   targetPointerY = (event.clientY / window.innerHeight - 0.5) * 2;
 }, { passive: true });
 
-shareButton.addEventListener('click', async () => {
+shareButton?.addEventListener('click', async () => {
   const title = 'FENNEL Invitation Card Demo';
   const text = '3D invitation card demo built for mobile event invitations.';
   const url = window.location.href;
